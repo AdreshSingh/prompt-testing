@@ -4,6 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "https://adreshsingh.github.io/prompt-testing/",
+  base: "/prompt-testing/",
   plugins: [react(), tailwindcss()],
 })

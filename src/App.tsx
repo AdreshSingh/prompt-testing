@@ -17,8 +17,8 @@ function App() {
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         type: "spring",
@@ -30,15 +30,15 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-start overflow-hidden relative selection:bg-blue-500/30">
-      
+
       {/* Background ambient lighting */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none opacity-50" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none opacity-50" />
 
       <main className="w-full max-w-5xl px-6 py-24 md:py-32 flex flex-col items-center relative z-10">
-        
+
         {/* Header Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -48,21 +48,22 @@ function App() {
             <Sparkles className="w-4 h-4" />
             <span>Prompt Engineering 2026</span>
           </div>
-          
+
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/60">
-            The future of testing. <br className="hidden md:block" />
+            {/* The future of testing. <br className="hidden md:block" /> */}
+            Prompting <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
               Starts here.
             </span>
           </h1>
-          
+
           <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto font-medium tracking-wide">
             Select your team's designated prompt assessment below. Each test is designed to push the boundaries of creative and technical instruction.
           </p>
         </motion.div>
 
         {/* Links Grid Section */}
-        <motion.div 
+        <motion.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
@@ -75,7 +76,7 @@ function App() {
               target="_blank"
               rel="noopener noreferrer"
               variants={itemVariants}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.02,
                 backgroundColor: "rgba(255, 255, 255, 0.08)",
                 borderColor: "rgba(255, 255, 255, 0.15)"
@@ -98,7 +99,7 @@ function App() {
             </motion.a>
           ))}
         </motion.div>
-        
+
       </main>
     </div>
   );
