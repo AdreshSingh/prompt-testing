@@ -1,5 +1,5 @@
 export const assessmentLinks = [
-    { name: "Program Connect Team - Prompt Test", link: "https://coderbyte.com/sl-candidate?promo=adda247-cktrp:technical-assessment-4lzn1cea58&invb=usery45kf7tb" },
+    { name: "Support Team ( SSM ) - Prompt Test", link: "https://coderbyte.com/sl-candidate?promo=adda247-cktrp:technical-assessment-4lzn1cea58&invb=usery45kf7tb" },
     { name: "Delivery Team - Prompt Test", link: "https://coderbyte.com/sl-candidate?promo=adda247-cktrp:technical-assessment-4dt6gt5vxi&invb=usery45kf7tb" },
     { name: "Placement Team - Prompt Test", link: "https://coderbyte.com/sl-candidate?promo=adda247-cktrp:technical-assessment-090a13nsb2&invb=usery45kf7tb" },
     { name: "Video Editing Team - Prompt Test", link: "https://coderbyte.com/sl-candidate?promo=adda247-cktrp:technical-assessment-4gknloc92i&invb=usery45kf7tb" },
