@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -11,17 +12,46 @@ interface Props {
 }
 
 export function CandidateDashboard({ title, candidates, searchQuery, columns }: Props) {
+  const [sortCol, setSortCol] = useState('percentage');
+  const [sortAsc, setSortAsc] = useState(false);
+
   const containerVariants: Variants = {
     hidden: { opacity: 0, scale: 0.95, y: 10 },
     visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
   };
 
-  const chartData = candidates.map(c => ({
+  const lowerQuery = searchQuery.toLowerCase().trim();
+
+  // Sort candidates
+  const sortedCandidates = [...candidates].sort((a, b) => {
+    let valA = a.raw[sortCol] || '';
+    let valB = b.raw[sortCol] || '';
+    
+    // Check if numeric column like percentage or marks
+    const numA = parseFloat(valA as string);
+    const numB = parseFloat(valB as string);
+    if (!isNaN(numA) && !isNaN(numB)) {
+      return sortAsc ? numA - numB : numB - numA;
+    }
+    
+    // Fallback to string sort
+    const cmp = String(valA).localeCompare(String(valB));
+    return sortAsc ? cmp : -cmp;
+  });
+
+  const chartData = sortedCandidates.map(c => ({
     name: c.name.split(' ')[0], // Use first name to save space
     score: c.gainedMarks,
   }));
 
-  const lowerQuery = searchQuery.toLowerCase().trim();
+  const handleSort = (col: string) => {
+    if (sortCol === col) {
+      setSortAsc(!sortAsc);
+    } else {
+      setSortCol(col);
+      setSortAsc(false); // default descending on click
+    }
+  };
 
   return (
     <motion.div 
@@ -69,12 +99,23 @@ export function CandidateDashboard({ title, candidates, searchQuery, columns }: 
             <thead className="bg-[#1d1d1f] text-zinc-400">
               <tr>
                 {columns.map(col => (
-                  <th key={col} className="px-5 py-4 font-medium uppercase tracking-wider text-xs">{col}</th>
+                  <th 
+                    key={col} 
+                    onClick={() => handleSort(col)}
+                    className="px-5 py-4 font-medium uppercase tracking-wider text-xs cursor-pointer select-none hover:text-white transition-colors"
+                  >
+                    <div className="flex items-center gap-1.5">
+                      {col}
+                      {sortCol === col && (
+                        <span className="text-blue-400 font-bold">{sortAsc ? '↑' : '↓'}</span>
+                      )}
+                    </div>
+                  </th>
                 ))}
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
-              {candidates.map((c, idx) => {
+              {sortedCandidates.map((c, idx) => {
                 const isMatch = lowerQuery !== '' && (c.name.toLowerCase().includes(lowerQuery) || c.email.toLowerCase().includes(lowerQuery));
                 return (
                   <tr 

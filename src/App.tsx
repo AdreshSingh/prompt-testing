@@ -29,7 +29,7 @@ function App() {
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
+    visible: {
       opacity: 1, y: 0,
       transition: { type: "spring", stiffness: 100, damping: 15 }
     },
@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-start overflow-hidden relative selection:bg-blue-500/30">
-      
+
       {/* Background ambient lighting */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none opacity-50" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none opacity-50" />
@@ -47,21 +47,19 @@ function App() {
         <div className="flex items-center p-1 bg-[#1d1d1f]/80 backdrop-blur-xl rounded-full border border-white/10">
           <button
             onClick={() => setActiveTab('assessments')}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
-              activeTab === 'assessments' 
-                ? 'bg-white/10 text-white shadow-sm' 
+            className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'assessments'
+                ? 'bg-white/10 text-white shadow-sm'
                 : 'text-zinc-400 hover:text-white hover:bg-white/5'
-            }`}
+              }`}
           >
             Assessments
           </button>
           <button
             onClick={() => setActiveTab('results')}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
-              activeTab === 'results' 
-                ? 'bg-white/10 text-white shadow-sm' 
+            className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'results'
+                ? 'bg-white/10 text-white shadow-sm'
                 : 'text-zinc-400 hover:text-white hover:bg-white/5'
-            }`}
+              }`}
           >
             Candidate Results
           </button>
@@ -69,15 +67,15 @@ function App() {
       </div>
 
       <main className="w-full max-w-[1200px] px-6 py-16 md:py-20 flex flex-col items-center relative z-10 font-sans">
-        
+
         {activeTab === 'assessments' && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="w-full max-w-5xl flex flex-col items-center mx-auto"
           >
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -87,20 +85,20 @@ function App() {
                 <Sparkles className="w-4 h-4" />
                 <span>Prompt Engineering 2026</span>
               </div>
-              
+
               <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/60">
                 The future of testing. <br className="hidden md:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
                   Starts here.
                 </span>
               </h1>
-              
+
               <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto font-medium tracking-wide">
                 Select your team's designated prompt assessment below. Each test is designed to push the boundaries of creative and technical instruction.
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial="hidden"
               animate="visible"
               variants={containerVariants}
@@ -147,31 +145,31 @@ function App() {
             <p className="text-zinc-400 mb-10 max-w-lg text-center">
               Search by name or email to securely highlight individual prompt test results and total marks breakdowns across the divisions.
             </p>
-            
+
             <div className="w-full mb-10 sticky top-6 z-50">
               <CandidateSearch value={searchQuery} onChange={setSearchQuery} />
             </div>
 
             {datasets.team.length > 0 && (
-              <CandidateDashboard 
+              <CandidateDashboard
                 title="Specialized Team Assessment"
                 candidates={datasets.team}
                 searchQuery={searchQuery}
-                columns={['Sno', 'Name', 'email', 'assessment', 'marks 1', 'grading 1', 'marks 3', 'total', 'gained marks']}
+                columns={['Sno', 'Name', 'email', 'assessment', 'marks 1', 'grading 1', 'marks 3', 'total', 'gained marks', 'percentage']}
               />
             )}
 
             {datasets.general.length > 0 && (
-              <CandidateDashboard 
+              <CandidateDashboard
                 title="General Assessment Test"
                 candidates={datasets.general}
                 searchQuery={searchQuery}
-                columns={['Sno', 'Name', 'email', 'assessment', 'marks 1', 'marks 2', 'marks 4', 'marks 5', 'total', 'gained marks']}
+                columns={['Sno', 'Name', 'email', 'assessment', 'marks 1', 'marks 2', 'marks 4', 'marks 5', 'total', 'gained marks', 'percentage']}
               />
             )}
           </motion.div>
         )}
-        
+
       </main>
     </div>
   );
