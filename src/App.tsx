@@ -164,7 +164,7 @@ function App() {
                 title="General Assessment Test"
                 candidates={datasets.general}
                 searchQuery={searchQuery}
-                columns={['Sno', 'Name', 'Email', 'Assessment', 'Task 1', 'Task 2', 'Task 3', 'Task 4', 'Total', 'Gained marks', 'Percentage']}
+                columns={['Sno', 'Name', 'Email', 'Assessment', 'Task 1', 'Task 2', 'Task 3', 'Task 4', 'Task 5', 'Total', 'Gained marks', 'Percentage']}
               />
             )}
           </motion.div>
