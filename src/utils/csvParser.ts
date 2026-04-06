@@ -1,14 +1,24 @@
 import Papa from 'papaparse';
 import type { CandidateData } from '../types/candidate';
 
+const getVal = (row: any, ...keys: string[]) => {
+  const rowKeys = Object.keys(row);
+  for (const key of keys) {
+    const lowerTarget = key.toLowerCase();
+    const foundKey = rowKeys.find(k => k.toLowerCase() === lowerTarget);
+    if (foundKey) return row[foundKey];
+  }
+  return '';
+};
+
 const parseCSVData = (rawData: any[]): CandidateData[] => {
   return rawData.map(row => {
     const marks: { question: string, score: number }[] = [];
     
-    // Extract any column that has 'marks' or 'grading' dynamically
+    // Extract any column that has 'marks', 'grading', or 'task' dynamically
     Object.keys(row).forEach(key => {
       const lowerKey = key.toLowerCase().trim();
-      if ((lowerKey.includes('marks') || lowerKey.includes('grading')) && lowerKey !== 'gained marks') {
+      if ((lowerKey.includes('marks') || lowerKey.includes('grading') || lowerKey.includes('task')) && lowerKey !== 'gained marks') {
         const scoreVal = parseFloat(row[key]);
         marks.push({
           question: key.trim(),
@@ -18,13 +28,13 @@ const parseCSVData = (rawData: any[]): CandidateData[] => {
     });
 
     return {
-      sno: row['Sno'] || '',
-      name: row['Name'] || '',
-      email: row['email'] || '',
-      assessment: row['assessment'] || '',
+      sno: getVal(row, 'sno') || '',
+      name: getVal(row, 'name') || '',
+      email: getVal(row, 'email') || '',
+      assessment: getVal(row, 'assessment') || '',
       marks: marks,
-      total: parseFloat(row['total']) || 0,
-      gainedMarks: parseFloat(row['gained marks']) || 0,
+      total: parseFloat(getVal(row, 'total')) || 0,
+      gainedMarks: parseFloat(getVal(row, 'gained marks')) || 0,
       raw: row
     };
   }).filter(c => c.name && c.email); // Only keep valid rows

@@ -48,8 +48,8 @@ function App() {
           <button
             onClick={() => setActiveTab('assessments')}
             className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'assessments'
-                ? 'bg-white/10 text-white shadow-sm'
-                : 'text-zinc-400 hover:text-white hover:bg-white/5'
+              ? 'bg-white/10 text-white shadow-sm'
+              : 'text-zinc-400 hover:text-white hover:bg-white/5'
               }`}
           >
             Assessments
@@ -57,8 +57,8 @@ function App() {
           <button
             onClick={() => setActiveTab('results')}
             className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'results'
-                ? 'bg-white/10 text-white shadow-sm'
-                : 'text-zinc-400 hover:text-white hover:bg-white/5'
+              ? 'bg-white/10 text-white shadow-sm'
+              : 'text-zinc-400 hover:text-white hover:bg-white/5'
               }`}
           >
             Candidate Results
@@ -155,7 +155,7 @@ function App() {
                 title="Specialized Team Assessment"
                 candidates={datasets.team}
                 searchQuery={searchQuery}
-                columns={['Sno', 'Name', 'email', 'assessment', 'marks 1', 'grading 1', 'marks 3', 'total', 'gained marks', 'percentage']}
+                columns={['Sno', 'Name', 'Email', 'Assessment', 'Task 1', 'Task 2', 'Task 3', 'Total', 'Gained marks', 'Percentage']}
               />
             )}
 
@@ -164,7 +164,7 @@ function App() {
                 title="General Assessment Test"
                 candidates={datasets.general}
                 searchQuery={searchQuery}
-                columns={['Sno', 'Name', 'email', 'assessment', 'marks 1', 'marks 2', 'marks 4', 'marks 5', 'total', 'gained marks', 'percentage']}
+                columns={['Sno', 'Name', 'Email', 'Assessment', 'Task 1', 'Task 2', 'Task 3', 'Task 4', 'Total', 'Gained marks', 'Percentage']}
               />
             )}
           </motion.div>
